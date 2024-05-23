@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended", "prettier"],
+  "rules": {
+    "tailwindcss/no-custom-classname": "off",
+    "import/no-named-as-default": 0
+  }
+}

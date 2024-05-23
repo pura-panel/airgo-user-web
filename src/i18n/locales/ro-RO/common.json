@@ -1,0 +1,11 @@
+{
+  "request.error": {
+    "401": "Neautorizat",
+    "403": "Interzis",
+    "404": "Nu a fost găsit",
+    "500": "Eroare internă a serverului",
+    "503": "Serviciu indisponibil",
+    "504": "Timeout la gateway",
+    "default": "Eroare necunoscută"
+  }
+}

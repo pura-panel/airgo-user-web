@@ -1,0 +1,32 @@
+{
+  "commentTranslate.hover.enabled": false,
+  "commentTranslate.multiLineMerge": true,
+  "css.validate": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.prettier": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "package.json": "*.lock, *.yaml, *.yml, *.json, .eslint*, .stylelint*, .prettier*, .change*, .release*, .remark*, .i18nrc.js, .iconifyrc.js, *ignore, .lintstagedrc, .editorconfig, LICENSE",
+    "next.config.mjs": "*.ts, *.mjs, *.css",
+    "Dockerfile": "Dockerfile, .dockerignore",
+    "tsconfig.json": "tsconfig.*.json",
+    ".env": ".env*, .env.local",
+    "README.md": "*.md"
+  },
+  "less.validate": false,
+  "npm.packageManager": "pnpm",
+  "npm.scriptExplorerExclude": ["prepare", "lint", "lint:md", "lint:style", "prettier"],
+  "scss.validate": false,
+  "stylelint.snippet": ["css", "less", "postcss", "scss", "html"],
+  "stylelint.validate": ["css", "less", "postcss", "scss", "html"]
+}

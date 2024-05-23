@@ -1,0 +1,79 @@
+{
+  "compared": {
+    "1": "Time to fully load Github",
+    "2": "Time to fully load Zoom",
+    "3": "Speedtest.net single-thread download",
+    "4": "Latency",
+    "after": "After acceleration",
+    "before": "Before acceleration"
+  },
+  "compatible": {
+    "description": "Our service is compatible with many excellent applications on various platforms. We are progressing with developers, updating in real-time, just to provide the best experience",
+    "statement": "(* Not being displayed does not mean it is not supported)",
+    "title": "Rich third-party application compatibility"
+  },
+  "description": "Our 100+ nodes are distributed across 10+ countries or regions around the world, providing you with a better user experience and accessible content.",
+  "features": [
+    {
+      "description": "No complex steps, you can register an account in as little as 30 seconds",
+      "title": "Quick Registration"
+    },
+    {
+      "description": "Our 100+ nodes are distributed across 10+ countries or regions around the world, and all our nodes maintain high-speed standards, so you can go wherever you want",
+      "title": "Multi-regional"
+    },
+    {
+      "description": "Our nodes are maintained by an excellent technical department, and we maintain a good relationship with operators, greatly reducing costs",
+      "title": "Cost Saving"
+    },
+    {
+      "description": "Cheer for our excellent technical department! They have specially optimized the routing of our nodes to provide lower latency and higher speeds",
+      "title": "Better Routing"
+    },
+    {
+      "description": "Thanks to the excellent third-party software developers, our nodes can be used on Windows, Android, iOS, macOS, and routers. Special thanks to them for their contributions",
+      "title": "One-click Connection"
+    },
+    {
+      "description": "Your data will be transmitted in encrypted form. It's not only encrypted transmission, but also high-priority encrypted transmission. You can also choose your favorite encryption method yourself",
+      "title": "Encrypted Seamlessly"
+    }
+  ],
+  "price": "Price",
+  "problem": {
+    "0": {
+      "description": "As long as you are a new registered user, you can try it out as soon as you log in.",
+      "title": "Do you offer a trial?"
+    },
+    "1": {
+      "description": "Yes, our lines are specially optimized for mainland China.",
+      "title": "Can I use it in mainland China?"
+    },
+    "2": {
+      "description": "Don't worry, our technical department is constantly monitoring, and they are the best.",
+      "title": "Is it stable?"
+    },
+    "3": {
+      "description": "Yes, most of our servers are not subject to Netflix's regional restrictions.",
+      "title": "Can I watch Netflix?"
+    },
+    "4": {
+      "description": "We support Alipay, WeChat, credit cards, and USDT-TRC20 payments.",
+      "title": "How do I pay?"
+    },
+    "title": "Frequently Asked Questions"
+  },
+  "start": "Start Now",
+  "title": {
+    "1": "We are committed to providing",
+    "2": [
+      "Lightning fast",
+      "Rock-solid",
+      "Multi-regional",
+      "Unique",
+      "Encrypted seamlessly",
+      "High value"
+    ],
+    "3": "global traffic transmission services"
+  }
+}
