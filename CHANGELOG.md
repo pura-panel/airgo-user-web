@@ -2,6 +2,12 @@
 
 # Changelog
 
+# [1.1.0](https://github.com/pura-panel/airgo-user-web/compare/v1.0.0...v1.1.0) (2024-05-25)
+
+### ✨ Features
+
+- **layout**: Update user layout content ([e84dfbd](https://github.com/pura-panel/airgo-user-web/commit/e84dfbd))
+
 # 1.0.0 (2024-05-23)
 
 ### ✨ Features
