@@ -3,6 +3,7 @@ import { DEFAULT_MODE, DEFAULT_SYSTEM_MODE, DEFAULT_THEME, isBrowser } from '@/l
 import { getCookie, setCookie } from '@/lib/cookies';
 
 export interface GlobalState {
+  currentMode?: 'light' | 'dark';
   systemMode?: 'light' | 'dark';
   mode: 'light' | 'dark' | 'system';
   theme:
@@ -29,9 +30,7 @@ export const globalState = proxy<GlobalState>({
 
 export function getSystemMode() {
   if (isBrowser()) {
-    return getCookie('systemMode') || window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
   return DEFAULT_SYSTEM_MODE;
 }
@@ -40,20 +39,32 @@ export function formatMode(mode: GlobalState['mode']) {
   return mode === 'system' ? getSystemMode() : mode;
 }
 
+export function checkMode(mode?: GlobalState['mode']) {
+  const currentFormatMode = formatMode(mode || globalState.mode);
+  const currentMode = document.documentElement.getAttribute(
+    'data-mode',
+  ) as GlobalState['currentMode'];
+  return currentFormatMode === currentMode;
+}
+
 export function setMode(mode: GlobalState['mode']) {
   if (globalState.mode !== mode) setCookie('mode', mode);
   globalState.mode = mode;
-  const systemMode = formatMode(mode);
-  if (globalState.systemMode !== systemMode) setCookie('systemMode', formatMode(systemMode));
-  globalState.systemMode = systemMode;
+  globalState.currentMode = formatMode(mode);
   const el = document.documentElement;
-  el.setAttribute('data-mode', globalState.systemMode);
-  el.style.colorScheme = globalState.systemMode;
+  el.setAttribute('data-mode', globalState.currentMode);
+  el.style.colorScheme = globalState.currentMode;
+  if (globalState.systemMode !== getSystemMode()) {
+    globalState.systemMode = getSystemMode();
+    setCookie('systemMode', getSystemMode());
+  }
 }
 
 export function toggleMode(mode: GlobalState['mode'], coordinate?: { x: number; y: number }) {
   const isDark = document.documentElement.getAttribute('data-mode') === 'dark';
-  if (!document.startViewTransition) return setMode(mode);
+  if (!document.startViewTransition || checkMode(mode)) {
+    return setMode(mode);
+  }
 
   const transition = document.startViewTransition(() => setMode(mode));
 

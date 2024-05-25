@@ -111,7 +111,7 @@ export default function BuyDialog({
       }}
     >
       {order && (
-        <DialogContent className='flex h-screen max-h-dvh max-w-screen-lg flex-col md:h-auto'>
+        <DialogContent className='flex h-full max-w-screen-lg flex-col overflow-hidden md:h-auto'>
           <DialogHeader>
             <DialogTitle>{order.subject || '商品标题'}</DialogTitle>
             <DialogDescription>
@@ -120,9 +120,9 @@ export default function BuyDialog({
           </DialogHeader>
           <div className='grid w-full gap-6 lg:grid-cols-2'>
             <Card className='border-transparent shadow-none md:border-inherit md:shadow'>
-              <CardContent className='grid gap-1 p-0  text-sm md:gap-3 md:p-6'>
+              <CardContent className='grid gap-3 p-0 text-sm md:p-6'>
                 <div className='font-semibold'>商品详情</div>
-                <ul className='grid gap-3 *:flex *:items-center *:justify-between'>
+                <ul className='grid grid-cols-2 gap-3 *:flex *:items-center *:justify-between lg:grid-cols-1'>
                   <li>
                     <span className='text-muted-foreground'>可用流量</span>
                     <span>
@@ -142,36 +142,35 @@ export default function BuyDialog({
                     </span>
                   </li>
                 </ul>
-                <Separator className='my-2 md:my-4' />
-                <ul className='grid gap-3'>
-                  <div className='font-semibold'>商品账单</div>
-                  <li className='flex items-center justify-between'>
+                <Separator />
+                <div className='font-semibold'>商品账单</div>
+                <ul className='grid grid-cols-2 gap-3 *:flex *:items-center *:justify-between lg:grid-cols-1'>
+                  <li>
                     <span className='text-muted-foreground'>套餐时长</span>
                     <span>{order.duration}个月</span>
                   </li>
-                  <li className='flex items-center justify-between'>
+                  <li>
                     <span className='text-muted-foreground'>单月价格</span>
                     <span>¥ {order.original_amount / order.duration}</span>
                   </li>
-                  <li className='flex items-center justify-between'>
+                  <li>
                     <span className='text-muted-foreground'>折扣码优惠</span>
                     <span>¥ {order.coupon_amount}</span>
                   </li>
-                  <li className='flex items-center justify-between font-semibold'>
-                    <span className='text-muted-foreground'>总价</span>
-                    <span>¥ {order.total_amount}</span>
-                  </li>
                 </ul>
+                <Separator />
+                <div className='flex items-center justify-between font-semibold'>
+                  <span className='text-muted-foreground'>总价</span>
+                  <span>¥ {order.total_amount}</span>
+                </div>
               </CardContent>
             </Card>
             <div className='flex flex-col justify-between text-sm'>
               <div className='grid gap-3'>
-                <div className='hidden font-semibold md:block'>用户余额</div>
-                <div className='flex items-center justify-between'>
-                  <span>¥ {order.balance_amount || '0.00'}</span>
+                <div className='flex items-center justify-between font-semibold md:block'>
+                  用户余额 <span>¥ {order.balance_amount || '0.00'}</span>
                 </div>
-                <div className='hidden font-semibold md:block'>折扣码</div>
-                <div className='flex '>
+                <div className='flex'>
                   <Input
                     placeholder='请输入折扣码'
                     value={order?.coupon_name}

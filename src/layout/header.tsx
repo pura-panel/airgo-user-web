@@ -24,6 +24,7 @@ export function LayoutHeader() {
   const { t } = useTranslation(lng, 'header');
   const { userInfo } = useUserInfo();
   const router = useRouter();
+
   const navs = [
     {
       title: '主页',

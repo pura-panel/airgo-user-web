@@ -51,7 +51,7 @@ export default function RootLayout({
       style={{
         colorScheme: mode,
       }}
-      suppressHydrationWarning
+      // suppressHydrationWarning
     >
       <head>
         <meta httpEquiv='X-UA-Compatible' content='IE=edge,chrome=1' />
