@@ -2,6 +2,12 @@
 
 # Changelog
 
+# [1.2.0](https://github.com/pura-panel/airgo-user-web/compare/v1.1.0...v1.2.0) (2024-05-25)
+
+### ✨ Features
+
+- **buy**: Add renewal ([2e21253](https://github.com/pura-panel/airgo-user-web/commit/2e21253))
+
 # [1.1.0](https://github.com/pura-panel/airgo-user-web/compare/v1.0.0...v1.1.0) (2024-05-25)
 
 ### ✨ Features
