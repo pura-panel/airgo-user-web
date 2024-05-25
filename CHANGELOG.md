@@ -2,6 +2,12 @@
 
 # Changelog
 
+# [1.4.0](https://github.com/pura-panel/airgo-user-web/compare/v1.3.0...v1.4.0) (2024-05-25)
+
+### ✨ Features
+
+- **layout**: Update layout and buy ([a4257ae](https://github.com/pura-panel/airgo-user-web/commit/a4257ae))
+
 # [1.3.0](https://github.com/pura-panel/airgo-user-web/compare/v1.2.0...v1.3.0) (2024-05-25)
 
 ### ✨ Features
