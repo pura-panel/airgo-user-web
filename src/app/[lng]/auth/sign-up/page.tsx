@@ -69,7 +69,7 @@ export default function SignUp({ params: { lng } }: { params: { lng: string } })
       email_suffix: `@${data.user_name.split('@')[1]}`,
       email_code: data.email_code,
       base64_captcha: {
-        b64s: config.captcha,
+        b64s: data.captcha,
         id: Captcha.data?.id,
       },
     });
