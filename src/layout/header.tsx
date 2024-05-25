@@ -7,6 +7,7 @@ import { useLanguage, useTranslation } from '@/i18n';
 import { userLogout, useUserInfo } from '@/stores/userInfo';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { Book, Bot, Home, ListOrdered, LogOut, Store, User, Wallet } from 'lucide-react';
+import { SITE_NAME } from '@/lib/constants';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -66,7 +67,7 @@ export function LayoutHeader() {
         <div className='flex gap-6'>
           <Link href='/' className='flex items-center space-x-2'>
             <Image src='/favicon.svg' alt='logo' width={1024} height={1024} className='size-12' />
-            <span className='inline-block font-bold'>Air Go</span>
+            <span className='inline-block font-bold'>{SITE_NAME}</span>
           </Link>
         </div>
 

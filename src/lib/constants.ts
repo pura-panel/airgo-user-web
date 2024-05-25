@@ -5,6 +5,7 @@ export const DEFAULT_MODE = (process.env.DEFAULT_MODE || 'system') as 'light' | 
 export const DEFAULT_SYSTEM_MODE = DEFAULT_MODE === 'system' ? 'light' : DEFAULT_MODE;
 export const DEFAULT_THEME = process.env.DEFAULT_THEME || 'blue';
 
+export const SITE_NAME = process.env.SITE_NAME || 'Air Go';
 export const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
 export const API_URL = process.env.API_URL || '';
 

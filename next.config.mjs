@@ -4,6 +4,7 @@ const ENV_KYES = [
   'DEFAULT_MODE',
   'DEFAULT_THEME',
   'DEFAULT_LANGUAGE',
+  'SITE_NAME',
   'SITE_URL',
   'API_URL',
   'EMAIL',
