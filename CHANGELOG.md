@@ -6,6 +6,12 @@
 
 ### ✨ Features
 
+- **app**: Complete migration project ([8bdcca4](https://github.com/pura-panel/airgo-user-web/commit/8bdcca4))
+
+# 1.0.0 (2024-05-23)
+
+### ✨ Features
+
 - **app**: Complete migration project ([6176cc4](https://github.com/pura-panel/airgo-user-web/commit/6176cc4))
 
 # 1.0.0 (2024-05-22)
