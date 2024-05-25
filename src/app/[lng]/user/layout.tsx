@@ -2,8 +2,27 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Book, Bot, Home, ListOrdered, Store, User, Wallet } from 'lucide-react';
+import { getCustomerFinanceGetCommissionSummary } from '@/service/api/customerApiFinance';
+import { useUserInfo } from '@/stores/userInfo';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import {
+  Book,
+  Bot,
+  Copy,
+  CreditCard,
+  DollarSign,
+  Home,
+  Landmark,
+  ListOrdered,
+  Store,
+  User,
+  Users,
+  Wallet,
+} from 'lucide-react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function UserLayout({
   params: { lng },
@@ -51,10 +70,17 @@ export default function UserLayout({
   ];
   const pathname = usePathname();
   const currentHref = pathname.includes(lng) ? pathname : `/${lng}${pathname}`;
-
+  const { userInfo } = useUserInfo();
+  const { data } = useSuspenseQuery({
+    queryKey: ['getCustomerFinanceGetCommissionSummary'],
+    queryFn: async () => {
+      const result = await getCustomerFinanceGetCommissionSummary();
+      return result.data.data || {};
+    },
+  });
   return (
-    <div className='container flex gap-6 align-top'>
-      <nav className='sticky top-[84px] hidden h-96 w-52 shrink-0 flex-col gap-2 text-muted-foreground md:flex lg:flex'>
+    <div className='container flex flex-wrap-reverse gap-6 align-top md:flex-nowrap'>
+      <nav className='sticky top-[84px] hidden h-96 w-52 shrink-0 flex-col gap-2 text-muted-foreground lg:flex'>
         {navs.map((nav, index) => (
           <Link href={nav.href} key={index}>
             <Button
@@ -68,7 +94,68 @@ export default function UserLayout({
           </Link>
         ))}
       </nav>
-      <div className='min-h-[calc(100vh-65px-85px)] w-full flex-auto gap-6 py-6'>{children}</div>
+      <div className='min-h-[calc(100vh-65px-85px)] w-full flex-auto gap-6 py-4 md:py-6'>
+        {children}
+      </div>
+      <div className='top-[84px] mt-4 grid size-full min-w-52 shrink-0 grid-cols-2 gap-4 md:sticky md:w-auto md:grid-cols-1 md:flex-col '>
+        <Card>
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+            <CardTitle className='text-sm font-medium'>账户余额</CardTitle>
+            <CreditCard className='size-5 text-muted-foreground' />
+          </CardHeader>
+          <CardContent className='text-2xl font-bold'>{userInfo?.balance.toFixed(2)}</CardContent>
+        </Card>
+        <Card>
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+            <CardTitle className='text-sm font-medium'>佣金总额</CardTitle>
+            <DollarSign className='size-5 text-muted-foreground' />
+          </CardHeader>
+          <CardContent className='text-2xl font-bold'>
+            {data.total_commission_amount || 0.0}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+            <CardTitle className='text-sm font-medium'>邀请人数</CardTitle>
+            <Users className='size-5 text-muted-foreground' />
+          </CardHeader>
+          <CardContent className='text-2xl font-bold'>{data?.total_invitation || 0}</CardContent>
+        </Card>
+        <Card>
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+            <CardTitle className='text-sm font-medium'>邀请总收益</CardTitle>
+            <Landmark className='size-5 text-muted-foreground' />
+          </CardHeader>
+          <CardContent className='text-2xl font-bold'>
+            {data?.total_commission_amount || 0.0}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+            <CardTitle className='text-sm font-medium'>邀请码</CardTitle>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant='ghost'
+                    className='size-5 p-0'
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `${location.origin}/auth/sign-up?aff=${userInfo?.invitation_code}`,
+                      );
+                      toast.success('邀请链接复制成功');
+                    }}
+                  >
+                    <Copy className='size-5 text-primary' />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>复制邀请链接</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </CardHeader>
+          <CardContent className='text-2xl font-bold'>{userInfo?.invitation_code}</CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
