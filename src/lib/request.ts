@@ -28,6 +28,8 @@ request.interceptors.response.use(
     const code = response.data.code;
     if ([401, 403, 404, 500, 503, 504].includes(code)) {
       t(`request.error.${code}`);
+    } else if (code !== 0) {
+      toast.error(response.data.msg);
     }
     return response;
   },
