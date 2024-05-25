@@ -21,6 +21,7 @@ import {
   Wallet,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import useMounted from '@/hooks/useMounted';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -78,6 +79,8 @@ export default function UserLayout({
       return result.data.data || {};
     },
   });
+  const mounted = useMounted();
+  if (!mounted) return null;
   return (
     <div className='container flex flex-wrap-reverse gap-6 align-top md:flex-nowrap'>
       <nav className='sticky top-[84px] hidden h-96 w-52 shrink-0 flex-col gap-2 text-muted-foreground lg:flex'>
@@ -103,7 +106,9 @@ export default function UserLayout({
             <CardTitle className='text-sm font-medium'>账户余额</CardTitle>
             <CreditCard className='size-5 text-muted-foreground' />
           </CardHeader>
-          <CardContent className='text-2xl font-bold'>{userInfo?.balance.toFixed(2)}</CardContent>
+          <CardContent className='text-2xl font-bold'>
+            {userInfo?.balance.toFixed(2) || '0.00'}
+          </CardContent>
         </Card>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
@@ -111,7 +116,7 @@ export default function UserLayout({
             <DollarSign className='size-5 text-muted-foreground' />
           </CardHeader>
           <CardContent className='text-2xl font-bold'>
-            {data.total_commission_amount || 0.0}
+            {data.total_commission_amount || '0.00'}
           </CardContent>
         </Card>
         <Card>
@@ -127,7 +132,7 @@ export default function UserLayout({
             <Landmark className='size-5 text-muted-foreground' />
           </CardHeader>
           <CardContent className='text-2xl font-bold'>
-            {data?.total_commission_amount || 0.0}
+            {data?.total_commission_amount || '0.00'}
           </CardContent>
         </Card>
         <Card>

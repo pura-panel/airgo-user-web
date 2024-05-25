@@ -51,7 +51,7 @@ export default function RootLayout({
       style={{
         colorScheme: mode,
       }}
-      // suppressHydrationWarning
+      suppressHydrationWarning
     >
       <head>
         <meta httpEquiv='X-UA-Compatible' content='IE=edge,chrome=1' />
@@ -60,7 +60,7 @@ export default function RootLayout({
       <body className={cn('w-screen overflow-x-hidden font-sans antialiased', fontSans.variable)}>
         <ReactQueryProvider>
           <AuthProvider>
-            <LayoutHeader />
+            <LayoutHeader lng={lng} />
             <main className='relative min-h-[calc(100vh-65px-85px)]'>{children}</main>
             <LayoutFooter />
           </AuthProvider>

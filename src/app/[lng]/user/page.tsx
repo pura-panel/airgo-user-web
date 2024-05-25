@@ -6,10 +6,6 @@ import {
   getCustomerCustomerServiceGetCustomerServiceList,
   postCustomerCustomerServiceResetSubscribeUuid,
 } from '@/service/api/customerApiCustomerService';
-import {
-  postCustomerOrderGetOrderInfo,
-  postCustomerOrderPreCreateOrder,
-} from '@/service/api/customerApiOrder';
 import { getPublicArticleGetDefaultArticleList } from '@/service/api/publicApiArticle';
 import { usePublicConfig, useUserInfo } from '@/stores/userInfo';
 import { useSuspenseQuery } from '@tanstack/react-query';
@@ -18,6 +14,7 @@ import { BellRing, Copy } from 'lucide-react';
 import QRCode from 'qrcode.react';
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
+import { isBrowser } from '@/lib/constants';
 import {
   Accordion,
   AccordionContent,
@@ -265,7 +262,9 @@ export default function User() {
                                   size='sm'
                                   onClick={() => {
                                     navigator.clipboard.writeText(app.url);
-                                    window.location.href = app.url;
+                                    if (isBrowser()) {
+                                      window.location.href = app.url;
+                                    }
                                   }}
                                   className='p-2'
                                 >

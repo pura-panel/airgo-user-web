@@ -15,6 +15,7 @@ import {
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { LoaderCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import useMounted from '@/hooks/useMounted';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {

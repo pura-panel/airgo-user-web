@@ -3,11 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useLanguage, useTranslation } from '@/i18n';
+import { useTranslation } from '@/i18n';
 import { userLogout, useUserInfo } from '@/stores/userInfo';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { Book, Bot, Home, ListOrdered, LogOut, Store, User, Wallet } from 'lucide-react';
 import { SITE_NAME } from '@/lib/constants';
+import useMounted from '@/hooks/useMounted';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,11 +20,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import SwitchLanguage from './switch-language';
 
-export function LayoutHeader() {
-  const { lng } = useLanguage();
+export function LayoutHeader({ lng }: { lng: string }) {
   const { t } = useTranslation(lng, 'header');
   const { userInfo } = useUserInfo();
   const router = useRouter();
+  const mounted = useMounted();
 
   const navs = [
     {
@@ -75,7 +76,8 @@ export function LayoutHeader() {
         <div className='flex flex-1 items-center justify-end gap-4'>
           <div className='flex items-center gap-1'>
             <SwitchLanguage />
-            {!userInfo && (
+
+            {!userInfo && mounted && (
               <>
                 <Link href={`/${lng}/auth/login`}>
                   <Button>{t('login')}</Button>
@@ -86,7 +88,7 @@ export function LayoutHeader() {
               </>
             )}
 
-            {userInfo && (
+            {userInfo && mounted && (
               <>
                 <Avatar className='mr-2 size-6'>
                   <AvatarImage src={userInfo.avatar} alt={userInfo.user_name} />

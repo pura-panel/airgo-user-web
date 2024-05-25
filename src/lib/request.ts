@@ -1,8 +1,9 @@
 import { getTranslation } from '@/i18n';
+import { userLogout } from '@/stores/userInfo';
 import axios, { type InternalAxiosRequestConfig } from 'axios';
 import i18next from 'i18next';
 import { toast } from 'sonner';
-import { API_URL, SITE_URL } from './constants';
+import { API_URL, isBrowser, SITE_URL } from './constants';
 import { getCookie } from './cookies';
 
 const request = axios.create({
@@ -28,6 +29,12 @@ request.interceptors.response.use(
     const code = response.data.code;
     if ([401, 403, 404, 500, 503, 504].includes(code)) {
       t(`request.error.${code}`);
+    } else if (code === 40101) {
+      userLogout();
+      toast.error(t('request.error.401'));
+      if (isBrowser()) {
+        window.location.href = `/${i18next.language}/auth/login`;
+      }
     } else if (code !== 0) {
       toast.error(response.data.msg);
     }
