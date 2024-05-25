@@ -2,6 +2,18 @@
 
 # Changelog
 
+# [1.3.0](https://github.com/pura-panel/airgo-user-web/compare/v1.2.0...v1.3.0) (2024-05-25)
+
+### ✨ Features
+
+- **auth**: Add sign up aff ([fcdba52](https://github.com/pura-panel/airgo-user-web/commit/fcdba52))
+- **request**: Add error toast ([d4fca08](https://github.com/pura-panel/airgo-user-web/commit/d4fca08))
+- **site**: Update site config ([2f799f7](https://github.com/pura-panel/airgo-user-web/commit/2f799f7))
+
+### 🐛 Bug Fixes
+
+- **auth**: Sign up captcha ([32af46f](https://github.com/pura-panel/airgo-user-web/commit/32af46f))
+
 # [1.2.0](https://github.com/pura-panel/airgo-user-web/compare/v1.1.0...v1.2.0) (2024-05-25)
 
 ### ✨ Features
