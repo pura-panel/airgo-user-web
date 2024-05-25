@@ -1,10 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import {
   getCustomerCustomerServiceGetCustomerServiceList,
   postCustomerCustomerServiceResetSubscribeUuid,
 } from '@/service/api/customerApiCustomerService';
+import {
+  postCustomerOrderGetOrderInfo,
+  postCustomerOrderPreCreateOrder,
+} from '@/service/api/customerApiOrder';
 import { getPublicArticleGetDefaultArticleList } from '@/service/api/publicApiArticle';
 import { usePublicConfig, useUserInfo } from '@/stores/userInfo';
 import { useSuspenseQuery } from '@tanstack/react-query';
@@ -33,6 +38,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import Loading from '../loading';
+import BuyDialog from './components/buy-dialog';
 import Store from './store/page';
 
 function getSubApps(backend_url: string, sub_uuid: string, sub_name: string) {
@@ -112,6 +119,9 @@ export default function User() {
     },
   });
 
+  const [loading, setLoading] = useState(false);
+  const [order, setOrder] = useState<any>();
+
   return (
     <div className='flex min-h-[calc(100vh-64px-58px-32px-114px)] w-full flex-col  gap-4 overflow-hidden'>
       <Card>
@@ -163,10 +173,23 @@ export default function User() {
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
-                  {item.is_renew && <Button size='sm'>续费</Button>}
+                  {item.is_renew && (
+                    <Button
+                      size='sm'
+                      onClick={async () => {
+                        setOrder({
+                          goods_id: item.goods_id,
+                          customer_service_id: item.id,
+                          order_type: 'Renew',
+                        });
+                      }}
+                    >
+                      续费
+                    </Button>
+                  )}
                 </div>
               </CardHeader>
-              <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5'>
+              <div className='grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5'>
                 <CardContent>
                   <CardDescription>剩余</CardDescription>
                   <CardTitle className='text-3xl'>
@@ -225,7 +248,7 @@ export default function User() {
                             </span>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent className='grid grid-cols-3 gap-4 lg:grid-cols-7'>
+                        <AccordionContent className='grid grid-cols-3 gap-4 lg:grid-cols-4 xl:grid-cols-7'>
                           {getSubApps(url, item.sub_uuid, config.sub_name).map((app) => (
                             <div
                               key={app.name}
@@ -251,7 +274,7 @@ export default function User() {
                               </div>
                             </div>
                           ))}
-                          <div className='hidden size-full flex-col items-center justify-between gap-2 text-sm text-muted-foreground md:flex lg:flex'>
+                          <div className='hidden size-full flex-col items-center justify-between gap-2 text-sm text-muted-foreground lg:flex'>
                             <span>二维码</span>
                             <QRCode
                               value={subAddress}
@@ -269,6 +292,8 @@ export default function User() {
               </CardContent>
             </Card>
           ))}
+          {loading && <Loading />}
+          <BuyDialog order={order} setOrder={setOrder} loading={loading} setLoading={setLoading} />
         </>
       ) : (
         <>
