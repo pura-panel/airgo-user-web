@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { getPublicCodeGetBase64Captcha } from '@/service/api/publicApiCode';
 import { postPublicUserRegister } from '@/service/api/publicApiUser';
 import { usePublicConfig } from '@/stores/userInfo';
@@ -35,6 +35,8 @@ const FormSchema = z.object({
 export default function SignUp({ params: { lng } }: { params: { lng: string } }) {
   const config = usePublicConfig();
 
+  const searchParams = useSearchParams();
+
   const Captcha = useQuery({
     enabled: config?.enable_base64_captcha,
     queryKey: ['getPublicCodeGetBase64Captcha'],
@@ -58,6 +60,7 @@ export default function SignUp({ params: { lng } }: { params: { lng: string } })
     defaultValues: {
       user_name: '',
       password: '',
+      referrer_code: searchParams.get('aff') || '',
     },
   });
 
